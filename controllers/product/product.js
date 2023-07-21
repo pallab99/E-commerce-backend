@@ -32,7 +32,6 @@ exports.getAllProducts = async (req, res) => {
     });
   }
   const totalDocs = await totalProductsQuery.count().exec();
-  console.log({ totalDocs });
 
   if (req.query._page && req.query._limit) {
     const pageSize = req.query._limit;
@@ -41,9 +40,11 @@ exports.getAllProducts = async (req, res) => {
   }
   try {
     const products = await queryString.exec();
-    console.log("hello");
     res.set("X-Total-Count", totalDocs);
-    res.status(200).json(products);
+    res.status(200).json({
+      products,
+      totalItems:totalDocs
+    });
   } catch (error) {
     console.log("error");
     res.status(500).json({
