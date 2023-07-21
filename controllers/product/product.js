@@ -43,7 +43,7 @@ exports.getAllProducts = async (req, res) => {
     res.set("X-Total-Count", totalDocs);
     res.status(200).json({
       products,
-      totalItems:totalDocs
+      totalItems: totalDocs,
     });
   } catch (error) {
     console.log("error");
@@ -51,5 +51,15 @@ exports.getAllProducts = async (req, res) => {
       status: "error",
       message: "An error occurred while fetching the products.",
     });
+  }
+};
+
+exports.getProductById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const product = await Product.findById(id);
+    res.status(200).json(product);
+  } catch (err) {
+    res.status(400).json(err);
   }
 };
