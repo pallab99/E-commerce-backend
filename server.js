@@ -10,6 +10,8 @@ const productRouter = require("./routes/products/product");
 const categoryRouter = require("./routes/category/category");
 const brandRouter = require("./routes/brand/brand");
 const authRouter = require("./routes/auth/auth.routes");
+const cartRouter = require("./routes/cart/cart.routes");
+
 //!middlewares
 server.use(cors());
 server.use(express.json());
@@ -20,6 +22,8 @@ server.use("/api", productRouter.router);
 server.use("/api", categoryRouter.router);
 server.use("/api", brandRouter.router);
 server.use("/api", authRouter.router);
+server.use("/api", cartRouter.router);
+
 
 server.get("/", (req, res) => {
   res.json({
