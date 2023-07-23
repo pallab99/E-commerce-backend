@@ -3,12 +3,8 @@ const { Address } = require("../../model/address/address.model");
 exports.getAddressByUserId = async (req, res) => {
   const { userId } = req.params;
   try {
-    const address = await Address.find({user: userId}).populate('user');
+    const address = await Address.find({ user: userId }).populate("user");
     console.log(address);
-    // const filteredData = address.map((item) => {
-    //     console.log({item});
-    // });
-    // // console.log(result);
     res.status(200).json({ result: address });
   } catch (err) {
     res.status(400).json(err);
@@ -27,24 +23,15 @@ exports.addAddress = async (req, res) => {
   }
 };
 
-// exports.deleteCartItemByProductId = async (req, res) => {
-//   try {
-//     const productId = req.params.productId;
-//     const cartItems = await Cart.findByIdAndDelete(productId);
-//     res.status(200).json(cartItems);
-//   } catch (err) {
-//     res.status(400).json(err);
-//   }
-// };
-// exports.updateCartItemByProductId = async (req, res) => {
-//   try {
-//     const productId = req.params.productId;
-//     const cartItems = await Cart.findByIdAndUpdate(productId, req.body, {
-//       new: true,
-//     });
-//     res.status(200).json(cartItems);
-//   } catch (err) {
-//     console.log(err);
-//     res.status(400).json(err);
-//   }
-// };
+exports.deleteAddressById = async (req, res) => {
+  try {
+    const {addressId} = req.params;
+    console.log(addressId);
+    const address = await Address.findByIdAndDelete(addressId);
+    console.log(address);
+    res.status(200).json(address);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+};
+
